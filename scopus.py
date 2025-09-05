@@ -4,7 +4,7 @@ import os
 
 # Replace with your actual API key and desired query
 api_key = os.environ["SCOPUS_API_KEY"] # Use secrets for production!
-query = "research software metadata"  # Replace with your search query
+query = 'TITLE("FAIR" AND "research software")'  # Replace with your search query
 
 # Base URL for the Scopus Search API
 base_url = "https://api.elsevier.com/content/search/scopus"
