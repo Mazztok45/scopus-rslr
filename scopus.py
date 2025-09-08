@@ -39,16 +39,16 @@ queries = [
 
 # Convert simple queries to field-specific queries for better precision
 def enhance_query(query):
-    """
-    Enhance simple queries with field-specific syntax for better precision
-    while preserving existing field-specific queries
-    """
-    # If query already contains field-specific syntax, return as-is
+    """Less restrictive query enhancement"""
     if any(op in query for op in ['TITLE(', 'ABS(', 'KEY(', 'TITLE-ABS-KEY(']):
         return query
 
-    # For simple queries, search in title, abstract, and keywords
-    return f'TITLE-ABS-KEY("{query}")'
+    # Use OR instead of AND for broader results
+    terms = query.split()
+    if len(terms) > 1:
+        return f'TITLE-ABS-KEY({" OR ".join(terms)})'
+    else:
+        return f'TITLE-ABS-KEY({query})'
 
 
 # Apply query enhancement
